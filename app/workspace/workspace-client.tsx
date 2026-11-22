@@ -27,7 +27,7 @@ const sectionCopy: Record<Section, { eyebrow: string; title: string; text: strin
     text: "Je vous accompagne dans vos recherches, vos démarches et la préparation de vos documents administratifs."
   },
   research: { eyebrow: "INTELLIGENCE DOCUMENTAIRE", title: "Recherche & analyse", text: "Explorez les textes, manuels et ressources intégrés à la bibliothèque de MIA." },
-  education: { eyebrow: "ESPACE PÉDAGOGIQUE", title: "Apprendre avec MIA", text: "Cours, exercices, explications, évaluations et accompagnement adapté à votre niveau." },
+  education: { eyebrow: "ACADÉMIE DU LYCÉE · T12", title: "Académie des Terminales", text: "Des professeurs IA spécialisés, organisés selon les trois parcours T12 du nouveau programme éducatif." },
   accounting: { eyebrow: "GESTION DE LA PLATEFORME", title: "Comptabilité de MIA", text: "Suivi des abonnements, recettes, dépenses, factures et rapports financiers de la plateforme." },
   miora: { eyebrow: "INTELLIGENCE CTD", title: "MIORA", text: "Votre intelligence spécialisée dans la gestion des collectivités territoriales décentralisées." },
   civil: {
@@ -53,16 +53,22 @@ const sectionCopy: Record<Section, { eyebrow: string; title: string; text: strin
 };
 
 const academicAgents = [
-  { subject: "Mathématiques", assistant: "MIORA", status: "Responsable désignée", detail: "Raisonnement mathématique, calcul, exercices et résolution de problèmes.", tone: "ready" },
+  { subject: "Mathématiques", assistant: "MIORA", status: "Responsable désignée", detail: "Raisonnement, calcul, démonstrations, exercices et résolution de problèmes.", tone: "ready" },
   { subject: "Philosophie", assistant: "MIA", status: "Responsable désignée", detail: "Notions, problématisation, argumentation, explication de textes et dissertation.", tone: "ready" },
-  { subject: "Sciences économiques et sociales", assistant: "IA spécialisée à créer", status: "À créer", detail: "Économie, société, analyse et méthodes des sciences sociales.", tone: "planned" },
-  { subject: "Physiques", assistant: "IA spécialisée à créer", status: "À créer", detail: "Cours, expériences expliquées, lois physiques et exercices.", tone: "planned" },
-  { subject: "SVT", assistant: "IA spécialisée à créer", status: "À créer", detail: "Sciences de la vie et de la Terre, schémas et explications.", tone: "planned" },
-  { subject: "Histo-Géo", assistant: "IA spécialisée à créer", status: "À créer", detail: "Histoire, géographie, repères, cartes et analyse documentaire.", tone: "planned" },
-  { subject: "Malagasy", assistant: "IA spécialisée à créer", status: "À créer", detail: "Langue, littérature, expression et culture malagasy.", tone: "planned" },
-  { subject: "Anglais", assistant: "IA spécialisée à créer", status: "À créer", detail: "Compréhension, expression, grammaire et pratique de la langue.", tone: "planned" },
-  { subject: "Russe", assistant: "IA spécialisée à créer", status: "À créer", detail: "Apprentissage progressif de la langue russe.", tone: "planned" },
-  { subject: "Allemand", assistant: "IA spécialisée à créer", status: "À créer", detail: "Apprentissage progressif de la langue allemande.", tone: "planned" }
+  { subject: "Sciences économiques et sociales", assistant: "IA SES à créer", status: "À créer", detail: "Économie, société, analyse et méthodes des sciences sociales.", tone: "planned" },
+  { subject: "Physique / Chimie", assistant: "IA Physique-Chimie à créer", status: "À créer", detail: "Lois physiques, phénomènes, chimie, exercices et situations expérimentales.", tone: "planned" },
+  { subject: "Sciences de la vie et de la Terre", assistant: "IA SVT à créer", status: "À créer", detail: "Sciences du vivant et de la Terre, schémas et analyse de documents.", tone: "planned" },
+  { subject: "Histoire / Géographie", assistant: "IA Histoire-Géo à créer", status: "À créer", detail: "Repères historiques, géographie, cartes et analyse documentaire.", tone: "planned" },
+  { subject: "Malagasy", assistant: "IA Malagasy à créer", status: "À créer", detail: "Langue, littérature, expression et culture malagasy.", tone: "planned" },
+  { subject: "Français", assistant: "IA Français à créer", status: "À créer", detail: "Langue, littérature, compréhension et expression écrite et orale.", tone: "planned" },
+  { subject: "Anglais", assistant: "IA Anglais à créer", status: "À créer", detail: "Compréhension, expression, grammaire et pratique de la langue.", tone: "planned" },
+  { subject: "Éducation physique et sportive", assistant: "IA EPS à créer", status: "À créer", detail: "Connaissances et apprentissages en éducation physique et sportive.", tone: "planned" }
+];
+
+const academicTracks = [
+  { code: "T12_L", label: "Lettres et sciences humaines" },
+  { code: "T12_S", label: "Sciences et expérimentation" },
+  { code: "T12_OSE", label: "Organisation, société et économie" }
 ];
 
 const quickActions = [
@@ -246,6 +252,7 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
                 </div>
                 <div className="academy-count"><strong>{academicAgents.length}</strong><span>matières<br />répertoriées</span></div>
               </div>
+              <div className="academy-tracks">{academicTracks.map((track) => <div className="academy-track" key={track.code}><strong>{track.code}</strong><span>{track.label}</span></div>)}</div>
               <div className="academy-grid">
                 {academicAgents.map((agent) => (
                   <article className="academy-card" key={agent.subject}>
@@ -264,7 +271,8 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
                 <span>MIORA : comptabilité et gestion financière des CTD.</span>
                 <span>MIA : comptabilité propre à la plateforme et enseignement de la philosophie.</span>
               </div>
-              <p className="academy-footnote">Répertoire initial établi à partir des matières citées. Il sera complété et vérifié avec le nouveau PE avant l'importation des programmes officiels.</p>
+              <div className="academy-extensions"><strong>Langues complémentaires envisagées</strong><span>Russe</span><span>Allemand</span><p>Ces deux matières sont conservées dans le projet, mais leur présence dans le référentiel officiel T12 reste à confirmer par lecture des PE concernés.</p></div>
+              <p className="academy-footnote">Périmètre initial : Terminale uniquement (T12). Les contenus seront organisés par parcours et par matière à partir du PE, de la répartition annuelle (RAPE) et des fascicules de ressources pédagogiques (FRP) du Ministère.</p>
             </section>
           ) : (
             <section className="section-placeholder">
