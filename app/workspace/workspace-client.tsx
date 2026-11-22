@@ -274,6 +274,36 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
               <div className="academy-extensions"><strong>Langues complémentaires envisagées</strong><span>Russe</span><span>Allemand</span><p>Ces deux matières sont conservées dans le projet, mais leur présence dans le référentiel officiel T12 reste à confirmer par lecture des PE concernés.</p></div>
               <p className="academy-footnote">Périmètre initial : Terminale uniquement (T12). Les contenus seront organisés par parcours et par matière à partir du PE, de la répartition annuelle (RAPE) et des fascicules de ressources pédagogiques (FRP) du Ministère.</p>
             </section>
+          ) : activeSection === "miora" ? (
+            <section className="academy-panel">
+              <div className="academy-intro">
+                <div>
+                  <p className="eyebrow">MIGRATION MIORA → MIA</p>
+                  <h2>Les compétences de MIORA prennent place dans MIA.</h2>
+                  <p>Les premières compétences spécialisées sont intégrées au cerveau de MIA. Le transfert complet des documents et outils de l'ancien projet reste en cours d'audit.</p>
+                </div>
+                <div className="academy-count"><strong>2</strong><span>expertises MIORA<br />en fondation</span></div>
+              </div>
+              <div className="academy-grid">
+                <article className="academy-card">
+                  <div className="academy-card-top"><span className="academy-symbol">⌂</span><span className="academy-status planned">Migration initiale</span></div>
+                  <h3>Gestion communale · CTD</h3>
+                  <p className="academy-agent">MIORA</p>
+                  <p className="academy-detail">Gouvernance communale, budgets, état civil et documents administratifs. Les instructions spécialisées sont en place; les sources complètes et outils historiques doivent encore être audités et migrés.</p>
+                </article>
+                <article className="academy-card">
+                  <div className="academy-card-top"><span className="academy-symbol">∑</span><span className="academy-status planned">Migration initiale</span></div>
+                  <h3>Mathématiques</h3>
+                  <p className="academy-agent">MIORA</p>
+                  <p className="academy-detail">Raisonnement étape par étape, calculs, vérification et accompagnement des exercices. Le PE Terminale et les ressources de référence restent à intégrer pour garantir l'alignement pédagogique.</p>
+                </article>
+              </div>
+              <div className="academy-note">
+                <strong>Migration sécurisée</strong>
+                <span>Le projet source est conservé. Aucune fonctionnalité n'est déclarée totalement migrée avant extraction, intégration et tests.</span>
+              </div>
+              <div className="academy-extensions"><strong>Prochaines étapes</strong><span>1 · Audit des sources MIORA</span><span>2 · Migration des connaissances et modèles</span><span>3 · Reprise des fonctions interactives et tests</span></div>
+            </section>
           ) : (
             <section className="section-placeholder">
               <div className="placeholder-symbol">{navigation.find((n) => n.id === activeSection)?.marker}</div>
