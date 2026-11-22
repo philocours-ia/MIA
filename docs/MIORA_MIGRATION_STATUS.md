@@ -74,3 +74,9 @@ Aucun enregistrement historique, identifiant, paiement ou dossier personnel du p
 3. Intégrer les maquettes officielles et tester l'impression PDF.
 4. Concevoir le schéma Supabase et les politiques RLS avant tout usage de données réelles.
 5. Migrer les autres modules par lots, puis auditer les fonctions de paiement et d'état civil séparément avant toute décision d'activation.
+
+## Alerte de sécurité sur le schéma Supabase historique
+
+Le fichier `Supabase/supabase_schema.sql` du projet source a également été consulté. Il active RLS sur certaines tables, mais ses politiques autorisent des accès publics très larges : lecture et modification des abonnements, accès global aux dossiers de communes, ainsi que lecture/mise à jour de demandes d'état civil. Ces règles ne garantissent pas l'isolation des collectivités ni la confidentialité des données.
+
+**Décision de migration : ne pas exécuter ni recopier ce schéma dans le Supabase d'OMNIA.** Il sert uniquement de référence d'audit. Avant de synchroniser les brouillons MIORA, un nouveau modèle devra être conçu avec des politiques RLS restrictives, une séparation par propriétaire/collectivité, des droits par rôle et des tests démontrant qu'un compte ne peut lire ni modifier les données d'un autre.
