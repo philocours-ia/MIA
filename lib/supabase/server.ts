@@ -1,17 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import type { Database } from "@/types/database";
 
 export async function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  if (!url || !key) {
-    return null;
-  }
+  if (!url || !key) return null;
 
   const cookieStore = await cookies();
-
-  return createServerClient(url, key, {
+  return createServerClient<Database>(url, key, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -22,8 +20,8 @@ export async function createClient() {
             cookieStore.set(name, value, options);
           });
         } catch {
-          // Les Server Components ne peuvent pas toujours écrire les cookies.
-          // Le proxy de session gère leur actualisation.
+          // Les Server Components ne peuvent pas écrire les cookies.
+          // proxy.ts actualise les sessions lors des requêtes.
         }
       }
     }
