@@ -19,7 +19,7 @@ Dans Supabase Dashboard → Authentication → URL Configuration :
 Ajouter uniquement pour les essais locaux, si nécessaire :
 `http://localhost:3000/auth/callback`
 
-L'application en production utilise désormais `NEXT_PUBLIC_APP_URL` pour construire le lien de confirmation et le callback. Le code ne reprend plus l'origine du navigateur, qui pouvait être `localhost`. La variable `NEXT_PUBLIC_APP_URL` est déjà configurée dans Vercel pour Production, Preview et Development. Après modification de la configuration Supabase, les nouveaux e-mails de confirmation doivent revenir sur le domaine MIA. En production, configurer un fournisseur SMTP fiable si les e-mails doivent être envoyés à grande échelle.
+L'application en production utilise désormais `NEXT_PUBLIC_APP_URL` pour construire le lien de confirmation et le callback. Le code ne reprend plus l'origine du navigateur, qui pouvait être `localhost`. Dans Authentication → Email Templates → Confirm signup, conserver le lien de confirmation Supabase `{{ .ConfirmationURL }}` plutôt qu'une adresse locale codée en dur. La variable `NEXT_PUBLIC_APP_URL` est déjà configurée dans Vercel pour Production, Preview et Development. Après modification de la configuration Supabase, les nouveaux e-mails de confirmation doivent revenir sur le domaine MIA. En production, configurer un fournisseur SMTP fiable si les e-mails doivent être envoyés à grande échelle.
 
 ## Variables Vercel
 Les deux variables suivantes sont déjà présentes dans les environnements Production, Preview et Development :
