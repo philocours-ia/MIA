@@ -11,13 +11,15 @@
 Dans Supabase Dashboard → Authentication → URL Configuration :
 
 **Site URL**
-`https://mia-assistant-julio7271-4573.vercel.app`
+`https://mia-assistant-phi.vercel.app`
 
 **Redirect URLs**
-`https://mia-assistant-julio7271-4573.vercel.app/auth/callback`
+`https://mia-assistant-phi.vercel.app/auth/callback`
+
+Ajouter uniquement pour les essais locaux, si nécessaire :
 `http://localhost:3000/auth/callback`
 
-Cette autorisation est nécessaire pour que les liens de confirmation e-mail reviennent vers MIA. En production, configurer un fournisseur SMTP fiable si les e-mails de confirmation doivent être envoyés à grande échelle.
+L'application en production utilise désormais `NEXT_PUBLIC_APP_URL` pour construire le lien de confirmation et le callback. Le code ne reprend plus l'origine du navigateur, qui pouvait être `localhost`. La variable `NEXT_PUBLIC_APP_URL` est déjà configurée dans Vercel pour Production, Preview et Development. Après modification de la configuration Supabase, les nouveaux e-mails de confirmation doivent revenir sur le domaine MIA. En production, configurer un fournisseur SMTP fiable si les e-mails doivent être envoyés à grande échelle.
 
 ## Variables Vercel
 Les deux variables suivantes sont déjà présentes dans les environnements Production, Preview et Development :
@@ -38,6 +40,8 @@ Le schéma initial est dans `supabase/schema.sql`.
 | `documents` | Métadonnées de documents et classification |
 | `drafts` | Projets de documents administratifs |
 | `activity_logs` | Journal d'activité, en ajout uniquement côté utilisateur |
+| `knowledge_sources` | Catalogue partagé des lois, décrets et manuels |
+| `knowledge_chunks` | Extraits structurés et indexés pour la recherche documentaire |
 
 Toutes les tables ci-dessus ont RLS activé. Les politiques limitent les lignes à `auth.uid()`. Les messages envoyés par un utilisateur sont autorisés avec le rôle `user`; les réponses IA devront être enregistrées par une fonction serveur fiable.
 
@@ -59,6 +63,6 @@ Le champ `verification_status` commence à `pending_review`. Le statut de valida
 
 ## Limites fonctionnelles actuelles
 - L'authentification par e-mail et mot de passe est préparée dans l'application.
-- Les droits multi-communes et les rôles d'administrateur ne sont pas encore configurés.
-- Le moteur IA n'est pas encore connecté.
+- Les rôles `owner`, `admin`, `editor` et `user` sont définis; l'interface de gestion des comptes reste à construire.
+- La bibliothèque documentaire partagée est configurée; le moteur de réponse IA n'est pas encore connecté à cette bibliothèque.
 - Aucun numéro officiel d'acte, visa, validation ou signature n'est généré automatiquement.
