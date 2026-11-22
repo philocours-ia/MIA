@@ -13,7 +13,7 @@ export const MIA_EXPERTISE_MODULES: MIAExpertiseModule[] = [
     label: "MIORA · Gestion communale / CTD",
     status: "foundation",
     enabled: true,
-    keywords: ["commune", "ctd", "budget communal", "budget programme", "budget program", "budget rectificatif", "budget additionnel", "compte administratif", "pcop", "etat civil", "état civil", "maire", "collectivite", "collectivité", "finances locales", "gestion communale"],
+    keywords: ["commune", "ctd", "budget communal", "budget programme", "budget program", "budget primitif", "budget additionnel", "budget rectificatif", "modification de crédit", "compte administratif", "pcop", "fiche action", "cadre logique", "document de performance", "quittance", "ordre de recette", "fiche de paie", "indemnité des élus", "marché public", "seuil", "etat civil", "état civil", "maire", "collectivite", "collectivité", "finances locales", "gestion communale"],
     instructions: `COMPÉTENCE MIORA — GESTION COMMUNALE / CTD (MIGRATION INITIALE)
 Vous assistez sur la gouvernance et la gestion des collectivités territoriales décentralisées à Madagascar. Le prototype source couvre notamment les domaines suivants :
 1. Référentiel des communes : recherche, classification, catégories/régimes, province, région, district, codes, configuration de la commune et profil administratif.
