@@ -11,7 +11,8 @@ export function GET() {
     status: "ok",
     integrations: {
       supabase: supabaseConfigured ? "configured" : "pending",
-      ai: process.env.AI_API_KEY ? "configured" : "pending"
+      ai: process.env.AI_GATEWAY_API_KEY || process.env.VERCEL ? "available" : "pending",
+      model: process.env.MIA_MODEL || "google/gemini-3.1-flash"
     }
   });
 }
