@@ -49,7 +49,7 @@ const quickActions = [
   { icon: "▧", title: "Analyser un document", description: "Comprendre, vérifier et résumer un document.", prompt: "Je souhaite analyser un document administratif." }
 ];
 
-export default function WorkspaceClient({ userEmail }: { userEmail: string }) {
+export default function WorkspaceClient({ userEmail, userRole }: { userEmail: string; userRole: string }) {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState<Section>("workspace");
   const [language, setLanguage] = useState<"FR" | "MG">("FR");
@@ -115,6 +115,13 @@ export default function WorkspaceClient({ userEmail }: { userEmail: string }) {
               {activeSection === item.id && <span className="nav-active-dot" />}
             </button>
           ))}
+          {(userRole === "owner" || userRole === "admin") && (
+            <a className="nav-item" href="/admin">
+              <span className="nav-marker">⚙</span>
+              <span>Administration</span>
+              <span className="nav-active-dot" />
+            </a>
+          )}
         </nav>
 
         <div className="sidebar-spacer" />
@@ -126,7 +133,7 @@ export default function WorkspaceClient({ userEmail }: { userEmail: string }) {
           <div className="profile-avatar">J</div>
           <div className="profile-copy">
             <strong>{userEmail || "Mon espace"}</strong>
-            <small>Compte sécurisé</small>
+            <small>{userRole === "owner" ? "Propriétaire MIA" : userRole === "admin" ? "Administrateur" : "Compte sécurisé"}</small>
           </div>
           <button className="logout-button" type="button" onClick={handleSignOut}>Quitter</button>
         </div>
