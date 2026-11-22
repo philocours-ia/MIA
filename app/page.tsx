@@ -125,7 +125,7 @@ export default function Home() {
         <header className="topbar">
           <div className="breadcrumb"><span>Accueil</span><b>/</b><strong>{navigation.find((n) => n.id === activeSection)?.label}</strong></div>
           <div className="topbar-right">
-            <span className="status-pill"><i /> Assistance disponible</span>
+            <span className="status-pill"><i /> Interface prête</span>
             <button className="language-toggle" type="button" onClick={() => setLanguage(language === "FR" ? "MG" : "FR")} aria-label="Changer la langue">
               {language === "FR" ? "FR  ↔  MG" : "MG  ↔  FR"}
             </button>
