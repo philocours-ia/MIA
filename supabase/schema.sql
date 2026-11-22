@@ -7,6 +7,8 @@ create table if not exists public.profiles (
   display_name text,
   preferred_language text not null default 'fr'
     check (preferred_language in ('fr', 'mg', 'fr_mg')),
+  role text not null default 'user'
+    check (role in ('owner', 'admin', 'editor', 'user')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -188,7 +190,10 @@ create policy "activity_logs_insert_own" on public.activity_logs for insert to a
 
 revoke all on public.profiles, public.conversations, public.messages, public.documents, public.drafts, public.activity_logs from anon, authenticated;
 grant usage on schema public to authenticated;
-grant select, insert, update on public.profiles to authenticated;
+grant select on public.profiles to authenticated;
+-- Role is intentionally omitted from client write grants.
+grant insert (id, display_name, preferred_language) on public.profiles to authenticated;
+grant update (id, display_name, preferred_language) on public.profiles to authenticated;
 grant select, insert, update, delete on public.conversations to authenticated;
 grant select on public.messages to authenticated;
 grant insert (conversation_id, user_id, role, content, source_refs) on public.messages to authenticated;
