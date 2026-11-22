@@ -26,6 +26,10 @@ const sectionCopy: Record<Section, { eyebrow: string; title: string; text: strin
     title: "Bonjour, je suis MIA.",
     text: "Je vous accompagne dans vos recherches, vos démarches et la préparation de vos documents administratifs."
   },
+  research: { eyebrow: "INTELLIGENCE DOCUMENTAIRE", title: "Recherche & analyse", text: "Explorez les textes, manuels et ressources intégrés à la bibliothèque de MIA." },
+  education: { eyebrow: "ESPACE PÉDAGOGIQUE", title: "Apprendre avec MIA", text: "Cours, exercices, explications, évaluations et accompagnement adapté à votre niveau." },
+  accounting: { eyebrow: "GESTION DE LA PLATEFORME", title: "Comptabilité de MIA", text: "Suivi des abonnements, recettes, dépenses, factures et rapports financiers de la plateforme." },
+  miora: { eyebrow: "INTELLIGENCE CTD", title: "MIORA", text: "Votre intelligence spécialisée dans la gestion des collectivités territoriales décentralisées." },
   civil: {
     eyebrow: "PRÉPARATION DES ACTES",
     title: "État civil",
