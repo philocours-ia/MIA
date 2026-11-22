@@ -6,11 +6,15 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-type Section = "workspace" | "civil" | "library" | "documents" | "history";
+type Section = "workspace" | "research" | "civil" | "education" | "accounting" | "miora" | "library" | "documents" | "history";
 
 const navigation: { id: Section; label: string; marker: string }[] = [
-  { id: "workspace", label: "Espace de travail", marker: "⌂" },
+  { id: "workspace", label: "Accueil", marker: "⌂" },
+  { id: "research", label: "Recherche", marker: "⌕" },
   { id: "civil", label: "État civil", marker: "▤" },
+  { id: "education", label: "Pédagogie", marker: "▣" },
+  { id: "accounting", label: "Comptabilité MIA", marker: "◈" },
+  { id: "miora", label: "MIORA · CTD", marker: "✦" },
   { id: "library", label: "Bibliothèque", marker: "▥" },
   { id: "documents", label: "Mes documents", marker: "▧" },
   { id: "history", label: "Historique", marker: "◷" }
@@ -47,7 +51,8 @@ const sectionCopy: Record<Section, { eyebrow: string; title: string; text: strin
 const quickActions = [
   { icon: "▤", title: "Préparer un acte", description: "Naissance, mariage, décès et autres actes.", prompt: "Je souhaite préparer un projet d'acte d'état civil." },
   { icon: "⌕", title: "Rechercher un texte", description: "Retrouver une loi, un décret ou un article.", prompt: "Je souhaite rechercher un texte officiel applicable à ma démarche." },
-  { icon: "▧", title: "Analyser un document", description: "Comprendre, vérifier et résumer un document.", prompt: "Je souhaite analyser un document administratif." }
+  { icon: "▧", title: "Analyser un document", description: "Comprendre, vérifier et résumer un document.", prompt: "Je souhaite analyser un document administratif." },
+  { icon: "✦", title: "Consulter MIORA", description: "Gestion communale et CTD.", prompt: "Je souhaite consulter MIORA au sujet de la gestion d’une CTD." }
 ];
 
 export default function WorkspaceClient({ userEmail, userRole }: { userEmail: string; userRole: string }) {
