@@ -200,6 +200,104 @@ export type Database = {
         }
         Relationships: []
       }
+      knowledge_chunks: {
+        Row: {
+          article_refs: string[]
+          chunk_index: number
+          content: string
+          created_at: string
+          id: string
+          language: string
+          page_refs: string | null
+          search_vector: unknown
+          source_id: string
+          tags: string[]
+          topic: string
+        }
+        Insert: {
+          article_refs?: string[]
+          chunk_index: number
+          content: string
+          created_at?: string
+          id?: string
+          language?: string
+          page_refs?: string | null
+          search_vector?: unknown
+          source_id: string
+          tags?: string[]
+          topic: string
+        }
+        Update: {
+          article_refs?: string[]
+          chunk_index?: number
+          content?: string
+          created_at?: string
+          id?: string
+          language?: string
+          page_refs?: string | null
+          search_vector?: unknown
+          source_id?: string
+          tags?: string[]
+          topic?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_chunks_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_sources: {
+        Row: {
+          applicability: string | null
+          caution: string | null
+          created_at: string
+          id: string
+          issuing_authority: string
+          official_url: string
+          published_on: string | null
+          reference_number: string | null
+          source_portal: string | null
+          source_type: string
+          title: string
+          updated_at: string
+          verification_status: string
+        }
+        Insert: {
+          applicability?: string | null
+          caution?: string | null
+          created_at?: string
+          id: string
+          issuing_authority: string
+          official_url: string
+          published_on?: string | null
+          reference_number?: string | null
+          source_portal?: string | null
+          source_type: string
+          title: string
+          updated_at?: string
+          verification_status?: string
+        }
+        Update: {
+          applicability?: string | null
+          caution?: string | null
+          created_at?: string
+          id?: string
+          issuing_authority?: string
+          official_url?: string
+          published_on?: string | null
+          reference_number?: string | null
+          source_portal?: string | null
+          source_type?: string
+          title?: string
+          updated_at?: string
+          verification_status?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string
