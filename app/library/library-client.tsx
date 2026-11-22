@@ -240,6 +240,9 @@ export default function LibraryClient({
           <p style={{ color: "#56645b", lineHeight: 1.7, margin: 0, fontSize: "13px" }}>
             Un texte officiel prime sur un manuel de procédure. Un manuel sert de guide et peut devenir obsolète lorsque le droit évolue. Les modèles communaux et les habitudes locales sont conservés séparément et ne deviennent jamais une règle de droit par eux-mêmes.
           </p>
+          <p style={{ color: "#56645b", lineHeight: 1.7, margin: "12px 0 0", fontSize: "13px" }}>
+            État actuel de l’index : {chunks.length} extraits de repérage sont enregistrés. La recherche porte sur ces extraits et les notices, pas encore sur l’intégralité de chaque page PDF. Pour vérifier un passage, ouvrez le texte complet depuis le portail officiel. Le moteur de conversation IA n’est pas encore raccordé à cette bibliothèque.
+          </p>
         </section>
       </div>
     </main>
