@@ -44,7 +44,7 @@ export default function LoginPage() {
           email,
           password,
           options: {
-            emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL || "https://mia-assistant-phi.vercel.app"}/auth/callback`,
+            emailRedirectTo: `${window.location.origin}/auth/callback`,
             data: { display_name: displayName.trim() || null }
           }
         });
@@ -73,15 +73,15 @@ export default function LoginPage() {
   return (
     <main className="auth-page">
       <section className="auth-card">
-        <a className="brand auth-brand" href="/" aria-label="MIA, accueil">
-          <span className="brand-mark"><span>M</span><i>✦</i></span>
-          <span className="brand-copy"><strong>MIA</strong><small>ASSISTANTE ADMINISTRATIVE</small></span>
+        <a className="brand auth-brand" href="/" aria-label="OMNIA, accueil">
+          <span className="brand-mark omnia-auth-mark"><img src="/omnia-logo.svg" alt="" /></span>
+          <span className="brand-copy"><strong>OMNIA</strong><small>ASSISTANTE ADMINISTRATIVE</small></span>
         </a>
 
         <div className="auth-intro">
           <p className="eyebrow">MALAGASY INTELLIGENT ASSISTANT</p>
           <h1>{mode === "signin" ? "Ravie de vous retrouver." : "Bienvenue dans votre espace."}</h1>
-          <p>{mode === "signin" ? "Connectez-vous pour retrouver votre espace de travail administratif." : "Créez votre compte pour ouvrir votre espace de travail MIA."}</p>
+          <p>{mode === "signin" ? "Connectez-vous pour retrouver votre espace de travail administratif." : "Créez votre compte pour ouvrir votre espace de travail OMNIA."}</p>
         </div>
 
         <div className="auth-tabs" role="tablist" aria-label="Accès au compte">
@@ -109,7 +109,7 @@ export default function LoginPage() {
             {mode === "signup" && <small>Choisissez une phrase de passe longue et unique.</small>}
           </div>
           <button className="auth-submit" type="submit" disabled={busy}>
-            {busy ? "Veuillez patienter…" : mode === "signin" ? "Accéder à MIA" : "Créer mon compte"}
+            {busy ? "Veuillez patienter…" : mode === "signin" ? "Accéder à OMNIA" : "Créer mon compte"}
             {!busy && <span>→</span>}
           </button>
         </form>
@@ -118,7 +118,7 @@ export default function LoginPage() {
           <span>▣</span>
           <p>Chaque compte dispose d'un espace privé. Vos documents et conversations ne sont pas partagés avec les autres comptes.</p>
         </div>
-        <p className="auth-foot">Les projets de documents restent soumis à la vérification du personnel habilité. MIA ne signe ni n'authentifie aucun acte officiel.</p>
+        <p className="auth-foot">Les projets de documents restent soumis à la vérification du personnel habilité. OMNIA ne signe ni n'authentifie aucun acte officiel.</p>
       </section>
 
       <div className="auth-side">
@@ -130,7 +130,7 @@ export default function LoginPage() {
           <h2>La bonne information.<br />Au bon moment.</h2>
           <span className="auth-side-tag">FRANÇAIS · MALAGASY</span>
         </div>
-        <div className="auth-side-bottom">MIA · MALAGASY INTELLIGENT ASSISTANT</div>
+        <div className="auth-side-bottom">OMNIA · MALAGASY INTELLIGENT ASSISTANT</div>
       </div>
     </main>
   );
