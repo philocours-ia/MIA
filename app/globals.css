@@ -245,3 +245,71 @@ button:focus-visible, textarea:focus-visible { outline: 3px solid rgba(38, 137, 
   .auth-brand { margin-bottom: 45px; }
   .auth-side { display: none; }
 }
+ 
+/* MIA ELECTRIC NIGHT — visual refresh */
+:root{--ink:#e8f2ff;--muted:#8ea4c2;--line:rgba(92,145,211,.17);--paper:#0b1220;--canvas:#060b14;--teal:#32a5ff;--teal-dark:#0878dc;--mint:#10253d;--gold:#62d5ff;--shadow:0 18px 50px rgba(0,0,0,.28)}
+body{background:var(--canvas);color:var(--ink)}
+.app-shell{background:radial-gradient(ellipse at 48% 0%,rgba(18,77,137,.16),transparent 40%),var(--canvas)}
+.sidebar,.assistant-panel{background:rgba(8,15,27,.96);border-color:var(--line)}
+.sidebar{padding-top:25px}
+.brand-mark,.mini-avatar{background:linear-gradient(145deg,#2aa8ff,#0753b8);box-shadow:0 0 26px rgba(35,145,255,.25)}
+.brand-copy strong{color:#e9f4ff}
+.brand-copy small,.workspace-label,.eyebrow,.subtle-label,.quiet-tag{color:#6684a8}
+.workspace-label{padding-top:36px}
+.nav-item{color:#90a6c3}
+.nav-item:hover{background:rgba(35,132,235,.1);color:#65baff}
+.nav-item.active{background:linear-gradient(90deg,rgba(18,114,220,.22),rgba(18,114,220,.06));color:#71c2ff;border:1px solid rgba(51,151,255,.13)}
+.nav-marker,.nav-item.active .nav-marker{color:#64b7ff}
+.nav-active-dot{background:#27a2ff;box-shadow:0 0 10px #27a2ff}
+.sidebar-note{background:linear-gradient(145deg,#0d1d31,#0b1524);border-color:var(--line);color:#92aac7}
+.profile-row{border-color:var(--line)}
+.profile-avatar{background:#102b49;color:#72c1ff}
+.profile-copy strong{color:#d8e8fb}.profile-copy small{color:#7087a6}
+.logout-button{background:#0b1626;border-color:var(--line);color:#8da7c7}
+.main-panel{background:transparent}
+.topbar{background:rgba(7,13,23,.78);border-color:var(--line);backdrop-filter:blur(14px)}
+.breadcrumb{color:#6f88a8}.breadcrumb strong{color:#c2d8f2}
+.status-pill{background:#0c1d30;border-color:rgba(57,155,255,.2);color:#7fc4ff}
+.language-toggle{color:#8ca7c7}.help-button{background:#0c1727;border-color:var(--line);color:#9bb4d1}
+.content-wrap{max-width:1200px}
+.welcome-row h1{color:#f0f7ff}.welcome-text{color:#8da5c3}
+.welcome-badge{background:#0c1727;border-color:var(--line)}
+.badge-caption strong{color:#dcecff}.badge-caption small{color:#7892b1}
+.mia-avatar{background:#0c2845}.avatar-hair{background:#1d324b}.avatar-face{background:#c99b7c}.avatar-collar{background:#173c61;border-top-color:#4aa7ff}
+.hero-card{background:linear-gradient(115deg,#071a32,#0b3a70 58%,#075ab1);border:1px solid rgba(71,166,255,.23);box-shadow:0 18px 45px rgba(0,45,104,.25)}
+.hero-kicker{color:#8ecbff}.hero-kicker span{color:#66d5ff}.hero-card p{color:#b3d6f6}
+.primary-button{background:#168dff;color:#fff;box-shadow:0 6px 22px #007bff42}
+.hero-orbit,.deco-ring{border-color:rgba(102,190,255,.23)}.deco-star{color:#66cfff;text-shadow:0 0 35px #48b5ff}.deco-caption{color:#7fb9ec}
+.section-heading h2{color:#e7f2ff}
+.action-card,.recent-card,.section-placeholder{background:#0b1422;border-color:var(--line);color:#d8e9fb}
+.action-card:hover{border-color:rgba(43,154,255,.45);box-shadow:0 14px 36px rgba(0,70,145,.18)}
+.action-icon{background:#102c49;color:#54b5ff}.icon-1{background:#122843;color:#79c5ff}.icon-2{background:#132844;color:#8bd8ff}
+.action-title{color:#d7e9fc}.action-description{color:#819bb9}.action-arrow{color:#55b5ff}
+.empty-icon{background:#10243a;color:#6ca8dd}.empty-activity strong{color:#d5e8fa}.empty-activity p{color:#7892b1}
+.principle-card{background:linear-gradient(145deg,#0c1c2e,#0a1422);border-color:var(--line)}
+.principle-icon{background:#102b45;color:#5fc1ff}.principle-card h3{color:#e0efff}.principle-card p:last-child{color:#89a2c0}
+.placeholder-symbol{background:#102b45;color:#6bc1ff}.section-placeholder h2{color:#e9f4ff}.section-placeholder>p:not(.eyebrow){color:#8da5c2}
+.placeholder-info{background:#0e2035;color:#90aac8}.secondary-button{background:#0c1b2d;border-color:var(--line);color:#65baff}
+.assistant-header{border-color:var(--line)}.assistant-heading strong{color:#d9eaff}.assistant-heading small{color:#8ca6c5}.panel-menu{color:#8ba5c4}
+.conversation-label{color:#6985a6}.conversation-label::after{background:var(--line)}
+.message-avatar{background:#103153;color:#65bbff}
+.message-bubble{background:#0e1d30;color:#bdd1e8;border:1px solid rgba(80,143,211,.1)}.message-author{color:#62baff}
+.user-message .message-bubble{background:linear-gradient(135deg,#0d3762,#0c2850);color:#d9edff;border:1px solid rgba(59,157,255,.2)}
+.suggestion-area{border-color:var(--line)}.suggestion-area p{color:#6985a5}.suggestion-area button{color:#91a9c7}.suggestion-area button:hover{color:#59b7ff}
+.chat-composer{background:#0b1626;border-color:rgba(69,144,222,.25);box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.chat-composer textarea{background:transparent;color:#d7eaff}.chat-composer textarea::placeholder{color:#6d87a7}
+.composer-footer{border-color:var(--line)}.composer-footer>span{color:#718ba9}
+.send-button{background:linear-gradient(145deg,#29a4ff,#0873d7);box-shadow:0 0 16px rgba(27,137,255,.2)}
+.privacy-note{color:#657e9d}
+.auth-page{background:#060b14}.auth-intro h1,.setup-card h1{color:#eaf4ff}
+.auth-intro>p:last-child,.setup-card>p:last-child{color:#8ca5c3}
+.auth-tabs{background:#0d1b2b}.auth-tabs button{color:#7f99b8}.auth-tabs button.selected{background:#142842;color:#67baff}
+.auth-field label{color:#9db5d1}.auth-field input{background:#0b1727;border-color:var(--line);color:#d9ebff}.auth-field input::placeholder{color:#66809e}
+.auth-submit{background:linear-gradient(135deg,#168eff,#075ab7);box-shadow:0 7px 20px #007bff2b}
+.auth-assurance{background:#0b1a2b;border-color:var(--line);color:#8fa9c7}.auth-foot{color:#6882a2}
+.auth-side{background:radial-gradient(circle at 70% 35%,#0b5bb2,#07182e 68%,#060b14)}
+.auth-side-content h2{color:#eff8ff}.auth-side-content>p{color:#8bcaff}.auth-side-star{color:#66cfff}
+.auth-side-tag{border-color:#3b83c54a;color:#a9d8ff}.auth-side-orbit{border-color:#55aaff25}
+.setup-card{background:#0b1626;border-color:var(--line)}
+@media(max-width:1040px){.assistant-panel{background:#080f1b;border-color:var(--line)}}
+@media(max-width:680px){.sidebar{background:#080f1b;border-color:var(--line)}.side-nav{scrollbar-color:#164475 transparent}.nav-item.active{border:0}}
