@@ -252,6 +252,19 @@ export default function MioraWorkspace({ onAsk, storageScope }: { onAsk: (prompt
   const expenseTotal = store.records.filter((item) => ["bp-depenses", "ba-depenses", "br-adjustments", "ca-depenses", "execution-expenses"].includes(item.pageId)).reduce((sum, item) => sum + item.amount, 0);
   const revenueTotal = store.records.filter((item) => ["bp-recettes", "ba-recettes", "ca-recettes", "execution-revenue"].includes(item.pageId)).reduce((sum, item) => sum + item.amount, 0);
 
+  // Tableau de travail BP isolé des mouvements BA, BR/MC, CA et de l'exécution.
+  const bpExpenseRecords = store.records.filter((item) => item.pageId === "bp-depenses");
+  const bpRevenueTotal = store.records.filter((item) => item.pageId === "bp-recettes").reduce((sum, item) => sum + item.amount, 0);
+  const bpExpenseTotal = bpExpenseRecords.reduce((sum, item) => sum + item.amount, 0);
+  const bpBalance = bpRevenueTotal - bpExpenseTotal;
+  const bpBreakdown = PROGRAMMES.map((program) => {
+    const programRecords = bpExpenseRecords.filter((item) => item.program === program);
+    const fonctionnement = programRecords.filter((item) => item.section === "Fonctionnement").reduce((sum, item) => sum + item.amount, 0);
+    const investissement = programRecords.filter((item) => item.section === "Investissement").reduce((sum, item) => sum + item.amount, 0);
+    return { program, fonctionnement, investissement, total: fonctionnement + investissement };
+  });
+  const showBpSummary = activeGroup === "Budget & opérations" && activePageId.startsWith("bp-");
+
   function changeGroup(group: string) {
     setActiveGroup(group);
     const firstPage = PAGES.find((item) => item.group === group);
@@ -300,11 +313,24 @@ export default function MioraWorkspace({ onAsk, storageScope }: { onAsk: (prompt
       <div className="miora-summary-card"><small>Total des recettes saisies</small><strong>{money(revenueTotal)}</strong><span>montants de brouillon cumulés</span></div>
       <div className="miora-summary-card"><small>Annexes BP cochées</small><strong>{store.checkedAnnexes.length}/9</strong><span>suivi de préparation</span></div>
     </div>
+    {showBpSummary && <section className="miora-bp-summary">
+      <div className="miora-bp-summary-heading"><div><p className="eyebrow">BUDGET PRIMITIF · ÉCRITURES SAISIES</p><h3>Répartition des dépenses par programme et section</h3></div><span>Sommes calculées à partir des brouillons BP uniquement</span></div>
+      <div className="miora-bp-kpis">
+        <div><small>Total dépenses BP</small><strong>{money(bpExpenseTotal)}</strong></div>
+        <div><small>Total recettes BP</small><strong>{money(bpRevenueTotal)}</strong></div>
+        <div><small>Écart indicatif recettes − dépenses</small><strong className={bpBalance < 0 ? "negative" : "positive"}>{money(bpBalance)}</strong></div>
+      </div>
+      <div className="miora-table-wrap"><table className="miora-record-table miora-bp-table"><thead><tr><th>Programme</th><th className="numeric">Fonctionnement</th><th className="numeric">Investissement</th><th className="numeric">Total</th></tr></thead><tbody>
+        {bpBreakdown.map((row) => <tr key={row.program}><td><strong>{row.program}</strong></td><td className="numeric">{money(row.fonctionnement)}</td><td className="numeric">{money(row.investissement)}</td><td className="numeric"><strong>{money(row.total)}</strong></td></tr>)}
+        <tr className="miora-bp-total-row"><td><strong>TOTAL DÉPENSES</strong></td><td className="numeric">{money(bpBreakdown.reduce((sum,row)=>sum+row.fonctionnement,0))}</td><td className="numeric">{money(bpBreakdown.reduce((sum,row)=>sum+row.investissement,0))}</td><td className="numeric"><strong>{money(bpExpenseTotal)}</strong></td></tr>
+      </tbody></table></div>
+      <p className="miora-bp-disclaimer">Cet aperçu ne constitue ni un tableau budgétaire officiel ni un contrôle de conformité. Il n'intègre pas encore les crédits BA, BR/MC, les opérations d'ordre, les reports et les règles réglementaires.</p>
+    </section>}
     <div className="miora-module-layout">
       <nav className="miora-module-nav" aria-label="Modules MIORA">
         <p className="miora-nav-caption">MODULES MÉTIER</p>
         {GROUPS.map((group) => <button key={group.id} type="button" className={activeGroup === group.id ? "miora-nav-item active" : "miora-nav-item"} onClick={() => changeGroup(group.id)}><span>{group.icon}</span><strong>{group.label}</strong><small>{PAGES.filter((item) => item.group === group.id).length} espace(s)</small></button>)}
-        <div className="miora-nav-note"><strong>À propos des données</strong><p>Les saisies restent locales à ce navigateur. Elles ne sont pas encore synchronisées avec Supabase ni partagées entre appareils.</p></div>
+        <div className="miora-nav-note"><strong>Mode brouillon local</strong><p>Les saisies restent sur cet appareil et ne sont pas chiffrées ni synchronisées. Utilisez uniquement des données fictives : aucune donnée réelle de paie, d'usager ou de dossier confidentiel.</p></div>
       </nav>
       <div className="miora-module-content">
         <div className="miora-page-tabs" role="tablist" aria-label="Sous-modules">
