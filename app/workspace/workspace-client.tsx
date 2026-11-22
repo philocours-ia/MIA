@@ -1,11 +1,12 @@
 "use client";
 
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type Section = "workspace" | "civil" | "library" | "documents" | "history";
-type Message = { id: number; role: "mia" | "you"; text: string };
 
 const navigation: { id: Section; label: string; marker: string }[] = [
   { id: "workspace", label: "Espace de travail", marker: "⌂" },
@@ -54,13 +55,9 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
   const [activeSection, setActiveSection] = useState<Section>("workspace");
   const [language, setLanguage] = useState<"FR" | "MG">("FR");
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      role: "mia",
-      text: "Bonjour et bienvenue ! Je suis MIA, votre assistante administrative. Comment puis-je vous accompagner aujourd'hui ?"
-    }
-  ]);
+  const { messages, sendMessage: sendAIMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({ api: "/api/chat" })
+  });
 
   const copy = sectionCopy[activeSection];
 
@@ -75,17 +72,8 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
   function sendMessage(event?: FormEvent<HTMLFormElement>, preset?: string) {
     event?.preventDefault();
     const text = (preset ?? input).trim();
-    if (!text) return;
-
-    setMessages((current) => [
-      ...current,
-      { id: Date.now(), role: "you", text },
-      {
-        id: Date.now() + 1,
-        role: "mia",
-        text: "Votre demande est bien reçue. L'interface MIA est en cours de raccordement à son moteur d'intelligence artificielle et à la bibliothèque documentaire privée. Cette réponse est un message de prévisualisation : aucune analyse juridique ni validation officielle n'a encore été effectuée."
-      }
-    ]);
+    if (!text || status !== "ready") return;
+    sendAIMessage({ text });
     setInput("");
   }
 
@@ -251,14 +239,16 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
         <div className="conversation-label"><span>AUJOURD'HUI</span></div>
         <div className="message-list" aria-live="polite">
           {messages.map((message) => (
-            <div key={message.id} className={message.role === "mia" ? "message-row mia-message" : "message-row user-message"}>
-              {message.role === "mia" && <div className="message-avatar">M</div>}
+            <div key={message.id} className={message.role === "assistant" ? "message-row mia-message" : "message-row user-message"}>
+              {message.role === "assistant" && <div className="message-avatar">M</div>}
               <div className="message-bubble">
-                {message.role === "mia" && <strong className="message-author">MIA</strong>}
-                <p>{message.text}</p>
+                {message.role === "assistant" && <strong className="message-author">MIA</strong>}
+                {message.parts.map((part, index) => part.type === "text" ? <p key={index}>{part.text}</p> : null)}
               </div>
             </div>
           ))}
+          {(status === "submitted" || status === "streaming") && <div className="message-row mia-message"><div className="message-avatar">M</div><div className="message-bubble"><strong className="message-author">MIA</strong><p>Je prépare votre réponse…</p></div></div>}
+          {error && <div className="chat-error" role="alert">La réponse n’a pas pu être générée. Vérifiez la configuration du moteur IA puis réessayez.</div>}
         </div>
 
         <div className="suggestion-area">
@@ -277,7 +267,7 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
           }} />
           <div className="composer-footer">
             <span>FR · MG <i /> Réponse respectueuse et documentée</span>
-            <button className="send-button" type="submit" disabled={!input.trim()} aria-label="Envoyer le message">↑</button>
+            <button className="send-button" type="submit" disabled={!input.trim() || status !== "ready"} aria-label="Envoyer le message">↑</button>
           </div>
         </form>
         <p className="privacy-note"><span>▣</span> Votre espace est protégé. Vérifiez toujours les documents avant tout usage officiel.</p>
