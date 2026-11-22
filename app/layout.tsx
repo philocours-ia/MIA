@@ -3,26 +3,11 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MIA — Malagasy Intelligent Assistant",
-  description:
-    "Votre assistante administrative bilingue pour rechercher, comprendre et préparer vos documents.",
-  applicationName: "MIA"
+  title: "OMNIA — Toute l'intelligence. Une seule vision.",
+  description: "Un écosystème d'intelligences spécialisées pour rechercher, comprendre, créer et décider.",
+  applicationName: "OMNIA"
 };
-
-export const viewport: Viewport = {
-  themeColor: "#f5f7f6",
-  width: "device-width",
-  initialScale: 1
-};
-
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: ReactNode;
-}>) {
-  return (
-    <html lang="fr">
-      <body>{children}</body>
-    </html>
-  );
+export const viewport: Viewport = { themeColor: "#1d1d37", width: "device-width", initialScale: 1 };
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  return <html lang="fr"><body>{children}</body></html>;
 }
