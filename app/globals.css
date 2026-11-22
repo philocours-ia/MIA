@@ -466,3 +466,18 @@ body{background:var(--canvas);color:var(--ink)}
 @media(max-width:1250px){.miora-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.miora-module-layout{grid-template-columns:145px minmax(0,1fr)}}
 @media(max-width:760px){.miora-workspace-header,.miora-page-heading{align-items:flex-start;flex-direction:column}.miora-module-layout{grid-template-columns:1fr}.miora-module-nav{display:flex;overflow-x:auto;align-items:stretch;gap:6px}.miora-nav-caption,.miora-nav-note{display:none}.miora-nav-item{flex:0 0 145px}.miora-page-heading .miora-assist-button{max-width:none}.miora-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:440px){.miora-summary-grid{grid-template-columns:1fr 1fr}.miora-fields-grid{grid-template-columns:1fr}.miora-field.wide{grid-column:auto}.miora-annex-item{grid-template-columns:15px 22px 1fr}.miora-annex-item small{grid-column:3}.miora-form-footer{align-items:flex-start;flex-direction:column}}
+/* MIORA — BP summary */
+.miora-bp-summary{display:grid;gap:9px;padding:13px;border:1px solid #dcebe2;border-radius:12px;background:linear-gradient(135deg,#f7fbf8,#fff)}
+.miora-bp-summary-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.miora-bp-summary-heading .eyebrow{margin-bottom:4px;color:#7da18f}
+.miora-bp-summary-heading h3{margin:0;color:#2d493c;font:800 12px Manrope,sans-serif}
+.miora-bp-summary-heading>span{color:#9aa99f;font-size:7px;text-align:right}
+.miora-bp-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.miora-bp-kpis>div{display:flex;flex-direction:column;gap:4px;padding:9px;border:1px solid #e7eee8;border-radius:8px;background:#fff;min-width:0}
+.miora-bp-kpis small{color:#84978b;font-size:7px;line-height:1.4}
+.miora-bp-kpis strong{color:#2b745c;font:800 clamp(10px,1vw,13px) Manrope;overflow-wrap:anywhere}
+.miora-bp-kpis strong.negative{color:#b96a62}.miora-bp-kpis strong.positive{color:#2b745c}
+.miora-bp-table th{background:#eaf3ed;color:#506b5a}
+.miora-bp-total-row td{background:#f2f7f3;color:#385c48;font-weight:800}
+.miora-bp-disclaimer{margin:0;color:#98a69d;font-size:7px;line-height:1.6}
+@media(max-width:520px){.miora-bp-summary-heading{align-items:flex-start;flex-direction:column}.miora-bp-summary-heading>span{text-align:left}.miora-bp-kpis{grid-template-columns:1fr}}
