@@ -102,7 +102,12 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
 
         <div className="workspace-label">ESPACE DE TRAVAIL</div>
         <nav className="side-nav" aria-label="Navigation principale">
-          {navigation.map((item) => (
+          {navigation.map((item) => item.id === "library" ? (
+            <a className="nav-item" href="/library" key={item.id}>
+              <span className="nav-marker">{item.marker}</span>
+              <span>{item.label}</span>
+            </a>
+          ) : (
             <button
               type="button"
               key={item.id}
