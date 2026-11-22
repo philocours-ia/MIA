@@ -52,6 +52,19 @@ const sectionCopy: Record<Section, { eyebrow: string; title: string; text: strin
   }
 };
 
+const academicAgents = [
+  { subject: "Mathématiques", assistant: "MIORA", status: "Responsable désignée", detail: "Raisonnement mathématique, calcul, exercices et résolution de problèmes.", tone: "ready" },
+  { subject: "Philosophie", assistant: "MIA", status: "Responsable désignée", detail: "Notions, problématisation, argumentation, explication de textes et dissertation.", tone: "ready" },
+  { subject: "Sciences économiques et sociales", assistant: "IA spécialisée à créer", status: "À créer", detail: "Économie, société, analyse et méthodes des sciences sociales.", tone: "planned" },
+  { subject: "Physiques", assistant: "IA spécialisée à créer", status: "À créer", detail: "Cours, expériences expliquées, lois physiques et exercices.", tone: "planned" },
+  { subject: "SVT", assistant: "IA spécialisée à créer", status: "À créer", detail: "Sciences de la vie et de la Terre, schémas et explications.", tone: "planned" },
+  { subject: "Histo-Géo", assistant: "IA spécialisée à créer", status: "À créer", detail: "Histoire, géographie, repères, cartes et analyse documentaire.", tone: "planned" },
+  { subject: "Malagasy", assistant: "IA spécialisée à créer", status: "À créer", detail: "Langue, littérature, expression et culture malagasy.", tone: "planned" },
+  { subject: "Anglais", assistant: "IA spécialisée à créer", status: "À créer", detail: "Compréhension, expression, grammaire et pratique de la langue.", tone: "planned" },
+  { subject: "Russe", assistant: "IA spécialisée à créer", status: "À créer", detail: "Apprentissage progressif de la langue russe.", tone: "planned" },
+  { subject: "Allemand", assistant: "IA spécialisée à créer", status: "À créer", detail: "Apprentissage progressif de la langue allemande.", tone: "planned" }
+];
+
 const quickActions = [
   { icon: "▤", title: "Préparer un acte", description: "Naissance, mariage, décès et autres actes.", prompt: "Je souhaite préparer un projet d'acte d'état civil." },
   { icon: "⌕", title: "Rechercher un texte", description: "Retrouver une loi, un décret ou un article.", prompt: "Je souhaite rechercher un texte officiel applicable à ma démarche." },
@@ -223,6 +236,36 @@ export default function WorkspaceClient({ userEmail, userRole }: { userEmail: st
                 </section>
               </div>
             </>
+          ) : activeSection === "education" ? (
+            <section className="academy-panel">
+              <div className="academy-intro">
+                <div>
+                  <p className="eyebrow">ÉQUIPE PÉDAGOGIQUE IA</p>
+                  <h2>Une intelligence pour chaque matière.</h2>
+                  <p>Chaque agent enseignera sa discipline à partir du programme éducatif, des cours et des documents de référence que vous intégrerez.</p>
+                </div>
+                <div className="academy-count"><strong>{academicAgents.length}</strong><span>matières<br />répertoriées</span></div>
+              </div>
+              <div className="academy-grid">
+                {academicAgents.map((agent) => (
+                  <article className="academy-card" key={agent.subject}>
+                    <div className="academy-card-top">
+                      <span className="academy-symbol">✦</span>
+                      <span className={agent.tone === "ready" ? "academy-status ready" : "academy-status planned"}>{agent.status}</span>
+                    </div>
+                    <h3>{agent.subject}</h3>
+                    <p className="academy-agent">{agent.assistant}</p>
+                    <p className="academy-detail">{agent.detail}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="academy-note">
+                <strong>Expertises transversales</strong>
+                <span>MIORA : comptabilité et gestion financière des CTD.</span>
+                <span>MIA : comptabilité propre à la plateforme et enseignement de la philosophie.</span>
+              </div>
+              <p className="academy-footnote">Répertoire initial établi à partir des matières citées. Il sera complété et vérifié avec le nouveau PE avant l'importation des programmes officiels.</p>
+            </section>
           ) : (
             <section className="section-placeholder">
               <div className="placeholder-symbol">{navigation.find((n) => n.id === activeSection)?.marker}</div>
