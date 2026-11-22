@@ -23,5 +23,16 @@ export default async function WorkspacePage() {
     console.error("Profile initialization failed:", profileError.message);
   }
 
-  return <WorkspaceClient userEmail={user.email ?? ""} />;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  return (
+    <WorkspaceClient
+      userEmail={user.email ?? ""}
+      userRole={profile?.role ?? "user"}
+    />
+  );
 }
