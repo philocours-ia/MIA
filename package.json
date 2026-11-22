@@ -14,7 +14,9 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "ai": "latest",
-    "@ai-sdk/react": "latest"
+    "@ai-sdk/react": "latest",
+    "@ai-sdk/openai": "latest",
+    "@ai-sdk/anthropic": "latest"
   },
   "devDependencies": {
     "@types/node": "22.15.30",
